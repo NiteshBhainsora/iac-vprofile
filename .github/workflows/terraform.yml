@@ -74,7 +74,7 @@ jobs:
       - name: get kube config file 
         id: getkubeconfig
         if: steps.apple.outcome == 'success'
-        run: aws eks update-kubeconfig --name ${{ env.EKS_CLUSTER }} --region ${{ env.awsregion }}
+        run: aws eks update-kubeconfig --region ${{ env.awsregion }} --name ${{ env.EKS_CLUSTER }}
 
       - name: install ingress controller
         if: steps.apple.outcome == 'success' && steps.getkubeconfig.outcome == 'success'
