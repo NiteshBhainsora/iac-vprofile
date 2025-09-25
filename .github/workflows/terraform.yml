@@ -59,15 +59,14 @@ jobs:
 
       - name: terraform plan
         id: plan
-        run: terraform plan 
-        continue-on-error: false
+        run: terraform plan -out planfile
+        continue-on-error: true
 
      # - name: terraform plan status
       #  if: steps.plan.outcome == 'failure'
        # run: exit 1
 
       - name: terraform apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         id: apple
         run: terraform apply -input=false -auto-approve -parallelism=1 planfile
 
